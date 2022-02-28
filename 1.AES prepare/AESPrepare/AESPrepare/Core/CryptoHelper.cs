@@ -6,10 +6,10 @@ namespace InformationSequriry_01.Core
 {
     public static class CryptoHelper
     {
-        private static bety[] key;
-        private static bety[] IV;
+        private static byte[] key;
+        private static byte[] IV;
 
-        static byte[] EncryptStringToBytes_Aes(string plainText)
+        public static byte[] EncryptStringToBytes_Aes(string plainText)
         {
             if (plainText == null || plainText.Length <= 0)
                 throw new ArgumentNullException("plainText");
@@ -41,12 +41,12 @@ namespace InformationSequriry_01.Core
             return encrypted;
         }
 
-        static string DecryptStringFromBytes_Aes(byte[] cipherText)
+        public static string DecryptStringFromBytes_Aes(byte[] cipherText)
         {
             // Check arguments.
             if (cipherText == null || cipherText.Length <= 0)
                 throw new ArgumentNullException("cipherText");
-            if (Key == null || Key.Length <= 0)
+            if (key == null || key.Length <= 0)
                 throw new ArgumentNullException("Key");
             if (IV == null || IV.Length <= 0)
                 throw new ArgumentNullException("IV");
@@ -55,7 +55,7 @@ namespace InformationSequriry_01.Core
 
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = Key;
+                aesAlg.Key = key;
                 aesAlg.IV = IV;
 
                 // Create a decryptor to perform the stream transform.
