@@ -21,6 +21,9 @@ namespace AESPrepare
 
         byte[] startFile;
         byte[] extendedFile;
+        byte[] encryptedFile;
+
+        Dictionary<string, byte[]> dictionary;
 
 
         public Form1()
@@ -107,7 +110,30 @@ namespace AESPrepare
 
         private void Decrypt_Click(object sender, EventArgs e)
         {
-            
+            var key = "";
+            var decryptedImage = new List<byte>();
+
+            var counter = 0;
+
+            for (var i = 0; i < encryptedFile.Length; i++)
+            {
+                key += (key == "" ? "" : ",") + encryptedFile[i];
+                counter++;
+
+                if(counter == 16)
+                {
+                    decryptedImage.AddRange(dictionary[key].ToList());
+                    key = "";
+                    counter = 0;
+                }                
+            }
+
+            var result = new List<byte>();
+
+            for (var i = 0; i < decryptedImage.Count() / 16; i++)
+                result.Add(decryptedImage[i * 16]);
+
+            finalImageBox.Image = ByteArrayToImage(result.Skip(256).ToArray());
 
             exceptionLabel.Text = "Изображение расшифровано";
             exceptionLabel.Visible = true;
@@ -116,9 +142,38 @@ namespace AESPrepare
 
         private void Translate_Click(object sender, EventArgs e)
         {
+            dictionary = new Dictionary<string, byte[]>();
 
+            for(var i = 0; i <= 255; i++)
+            {
+                var key = "";
+                var value = new List<byte>();
 
-            exceptionLabel.Text = "Изображение расшифровано";
+                for(var j = 0; j <= 15; j++)
+                {
+                    key += (key == "" ? "" : ",") + encryptedFile[i * 16 + j];
+                    value.Add(0);
+                }
+                value[0] = Convert.ToByte(i);
+                dictionary.Add(key, value.ToArray());
+            }
+
+            using (StreamWriter fstream = new StreamWriter(Directory.GetCurrentDirectory() + "dictionary.txt"))
+            {
+                foreach (var key in dictionary.Keys)
+                {
+                    var valueStr = "";
+                    var value = dictionary[key];
+                    for(var i = 0; i <= 15; i++)
+                    {
+                        valueStr += value[i] + (i != 15 ? "," : "");
+                    }
+
+                    fstream.WriteLine(key + " -> " + valueStr);
+                }
+            }            
+
+            exceptionLabel.Text = "Матрица записана";
             exceptionLabel.Visible = true;
             timer.Start();
         }
@@ -160,10 +215,12 @@ namespace AESPrepare
             byte[] encriptedImage = null;
 
             if (extendedFile != null)
-                encriptedImage = CryptoHelper.EncryptStringToBytes_Aes(Encoding.UTF8.GetString(extendedFile));
+                encriptedImage = CryptoHelper.EncryptStringToBytes_Aes(extendedFile);
 
             if (encriptedImage != null)
             {
+                encryptedFile = encriptedImage;
+
                 exceptionLabel.Text = "Изображение зашифровано";
                 exceptionLabel.Visible = true;
                 timer.Start();
