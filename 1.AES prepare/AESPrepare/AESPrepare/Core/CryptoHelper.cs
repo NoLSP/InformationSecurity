@@ -8,17 +8,19 @@ namespace InformationSequriry_01.Core
     {
         private static string key = "abcdefghijklmnop";
 
-        public static byte[] EncryptStringToBytes_Aes(string plainText)
+        public static async byte[] EncryptStringToBytes_Aes(string plainText)
         {
             if (plainText == null || plainText.Length <= 0)
                 throw new ArgumentNullException("plainText");
-            byte[] encrypted;
 
+            var result = new List<byte>();
 
+            for(var i = 0; i < plainText.Length(); i ++)
+            {
+                result.Add((((int)plainText[i]) + ((int)key[i/16])) / 256);
+            }
 
-            for(var i = 1; i < )
-
-            return encrypted;
+            return result.ToArray();
         }
 
         public static string DecryptStringFromBytes_Aes(byte[] cipherText)
