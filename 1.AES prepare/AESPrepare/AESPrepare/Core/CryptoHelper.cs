@@ -6,8 +6,7 @@ namespace InformationSequriry_01.Core
 {
     public static class CryptoHelper
     {
-        private static byte[] key;
-        private static byte[] IV;
+        private static string key = "abcdefghijklmnop";
 
         public static byte[] EncryptStringToBytes_Aes(string plainText)
         {
@@ -15,28 +14,9 @@ namespace InformationSequriry_01.Core
                 throw new ArgumentNullException("plainText");
             byte[] encrypted;
 
-            using (Aes aesAlg = Aes.Create())
-            {
-                key = aesAlg.Key;
-                IV = aesAlg.IV;
 
-                // Create an encryptor to perform the stream transform.
-                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
-                // Create the streams used for encryption.
-                using (MemoryStream msEncrypt = new MemoryStream())
-                {
-                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                    {
-                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
-                        {
-                            //Write all data to the stream.
-                            swEncrypt.Write(plainText);
-                        }
-                        encrypted = msEncrypt.ToArray();
-                    }
-                }
-            }
+            for(var i = 1; i < )
 
             return encrypted;
         }

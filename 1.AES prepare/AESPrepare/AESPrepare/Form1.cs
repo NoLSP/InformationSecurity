@@ -69,6 +69,13 @@ namespace AESPrepare
             decryptButton.Click += Decrypt_Click;
             this.Controls.Add(decryptButton);
 
+            var translateButton = new Button();
+            translateButton.Size = new Size(100, 30);
+            translateButton.Location = new Point(580, 680);
+            translateButton.Text = "Translate";
+            translateButton.Click += Translate_Click;
+            this.Controls.Add(translateButton);
+
             exceptionLabel = new Label();
             exceptionLabel.Size = new Size(200, 40);
             exceptionLabel.Location = new Point(690, 590);
@@ -88,7 +95,7 @@ namespace AESPrepare
 
             var dictionary = GetDictionary(n);
 
-            var image = PrepareImage(ImageToByteArray(startImageBox.Image), n);
+            var image = PrepareImage(startFile, n);
 
             dictionary.AddRange(image);
             extendedFile = dictionary.ToArray();
@@ -98,9 +105,18 @@ namespace AESPrepare
             timer.Start();
         }
 
-        private void Decript_Click(object sender, EventArgs e)
+        private void Decrypt_Click(object sender, EventArgs e)
         {
             
+
+            exceptionLabel.Text = "Изображение расшифровано";
+            exceptionLabel.Visible = true;
+            timer.Start();
+        }
+
+        private void Translate_Click(object sender, EventArgs e)
+        {
+
 
             exceptionLabel.Text = "Изображение расшифровано";
             exceptionLabel.Visible = true;
@@ -165,6 +181,7 @@ namespace AESPrepare
             {
                 var bitmap = LoadBitmap(openDialog.FileName);
                 startImageBox.Image = bitmap;
+                startFile = ImageToByteArray(bitmap);
             }
             catch (OutOfMemoryException ex)
             {
