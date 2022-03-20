@@ -1,0 +1,45 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Stenography/1.0.0": {
+        "dependencies": {
+          "DocX": "2.0.0"
+        },
+        "runtime": {
+          "Stenography.dll": {}
+        }
+      },
+      "DocX/2.0.0": {
+        "runtime": {
+          "lib/net40/Xceed.Document.NET.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          },
+          "lib/net40/Xceed.Words.NET.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Stenography/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DocX/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2YPfinRgHBCF4vPFyFxLcO3YmIg3NVkCx9KaePfaRRTjZkSgCYFe3yaKXQlc4GPZWEePx9qlOhAGK7sM7OEZtw==",
+      "path": "docx/2.0.0",
+      "hashPath": "docx.2.0.0.nupkg.sha512"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "rXjVryuRADBOqve89FDE6esJnSX079wlXGPMpyjBIuHzc8pv6KYYWQ6PT+XmSh0GzwybZIV0V+vjeT/nqrAfkw==",
+  "success": true,
+  "projectFilePath": "E:\\Studying\\InformationSecurity\\2.Stenography\\Stenography\\Stenography.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Buloyaka\\.nuget\\packages\\docx\\2.0.0\\docx.2.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"DocX 2.0.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \".NETCoreApp,Version=v3.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "DocX",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}
