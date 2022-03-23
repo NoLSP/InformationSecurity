@@ -110,7 +110,7 @@ namespace Stenography
                 while(Char.ToLower(textInWord[currentIndex]) != Char.ToLower(symbol))
                 {
                     currentIndex++;
-                    if(currentIndex > textInWord.Length)
+                    if(currentIndex >= textInWord.Length)
                     {
                         exceptionLabel.Text = "Ошибка шифрования. Символ не обнаружен";
                         exceptionLabel.Visible = true;
